@@ -1,13 +1,21 @@
 {
   "name": "appointment-tracking-system-backend",
-  "module": "index.js",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tahabinaziz/frv_germany.git"
   },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tahabinaziz/frv_germany/issues"
+  },
+  "homepage": "https://github.com/tahabinaziz/frv_germany#readme",
   "dependencies": {
     "express": "^5.2.1"
   }
