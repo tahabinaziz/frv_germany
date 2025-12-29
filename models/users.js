@@ -12,10 +12,10 @@ export async function registerUser(name, email, password) {
 
   return newUser[0];
 }
-
-export async function getUserAndRoles(email) {
+export async function getUser(email) {
   return await sql`
-  SELECT users.id, users.name, users.email FROM users
-  WHERE users.email = ${email}
+    SELECT *
+    FROM users
+    WHERE email = ${email}
   `;
 }

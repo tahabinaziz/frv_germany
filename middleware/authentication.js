@@ -1,4 +1,4 @@
-import { getUserAndRoles } from "../models/users.js";
+import { getUser } from "../models/users.js";
 import jwt from "jsonwebtoken";
 import { verifyPassword } from "../utility/crypt.js";
 
@@ -6,7 +6,7 @@ const authenticationMiddleware = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   try {
-    const user = await getUserAndRoles(email);
+    const user = await getUser(email);
     console.log("user", user);
 
     if (!user || user.length === 0) {
