@@ -1,6 +1,6 @@
 import postgres from "postgres";
 
-export const sql = postgres({
+const sql = postgres({
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
   database: process.env.DATABASE_NAME,
@@ -8,5 +8,4 @@ export const sql = postgres({
   password: process.env.DATABASE_PASSWORD,
   debug: true,
 }); // will use psql environment variables
-
-// export default { sqlSensors, sqlUsers };
+export default { sql };

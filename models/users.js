@@ -1,5 +1,5 @@
 import { hashPassword } from "../utility/crypt.js";
-import sql from "./db.js";
+import sql from "./db";
 
 export async function registerUser(name, email, password) {
   const passwordHash = await hashPassword(password);
