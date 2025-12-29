@@ -8,4 +8,4 @@ const sql = postgres({
   password: process.env.DATABASE_PASSWORD,
   debug: true,
 }); // will use psql environment variables
-export default { sql };
+export default sql;
