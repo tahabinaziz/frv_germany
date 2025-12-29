@@ -1,7 +1,6 @@
-import { Request, Response, NextFunction } from "express";
 import { getUserAndRoles } from "../models/users.js";
-import { verifyPassword } from "../crypt.js";
 import jwt from "jsonwebtoken";
+import { verifyPassword } from "../utility/crypt.js";
 
 const authenticationMiddleware = async (req, res, next) => {
   const email = req.body.email;
