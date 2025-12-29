@@ -10,16 +10,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/users", async (req, res) => {
-  if (req.roles_id?.includes(1)) {
-    try {
-      const { name, email, password } = req.body;
-      await registerUser(name, email, password);
-      return res.json({ message: "New user has been created!" });
-    } catch (error) {
-      console.log("err", error);
+  try {
+    const { name, email, password } = req.body;
+    await registerUser(name, email, password);
+    console.log("New user has been created!");
+    console.log(req.body, "body");
+    return res.json({ message: "New user has been created!" });
+  } catch (error) {
+    console.log("err", error);
 
-      return res.status(400).json({ error: error });
-    }
+    return res.status(400).json({ error: error });
   }
 });
 app.listen(port, () => {
