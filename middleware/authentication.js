@@ -15,7 +15,7 @@ const authenticationMiddleware = async (req, res, next) => {
       return res.status(400).json({ error: "Multiple users with same email" });
     }
 
-    const validate = await verifyPassword(password, user[0].password);
+    const validate = await verifyPassword(password, user[0].password_hash);
 
     if (validate !== true) {
       return res.status(400).json({ error: "Wrong password" });
