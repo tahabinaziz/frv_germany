@@ -7,5 +7,6 @@ const sql = postgres({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   debug: true,
+  ssl: "require",
 }); // will use psql environment variables
 export default sql;
