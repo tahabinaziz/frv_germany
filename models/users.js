@@ -17,6 +17,5 @@ export async function getUserAndRoles(email) {
   return await sql`
   SELECT users.id, users.name, users.email FROM users
   WHERE users.email = ${email}
-
   `;
 }

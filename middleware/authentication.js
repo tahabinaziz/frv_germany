@@ -7,6 +7,7 @@ const authenticationMiddleware = async (req, res, next) => {
   const password = req.body.password;
   try {
     const user = await getUserAndRoles(email);
+    console.log("user", user);
 
     if (!user || user.length === 0) {
       return res.status(400).json({ error: "User not found" });
@@ -37,6 +38,7 @@ const authenticationMiddleware = async (req, res, next) => {
     req.access_token = token;
     return next();
   } catch (error) {
+    console.log("err", error);
     return res.status(400).json({ error: "Authentication failed" });
   }
 };
