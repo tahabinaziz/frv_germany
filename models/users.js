@@ -25,6 +25,6 @@ export async function resetPassword(email, plainText) {
   await sql`
   UPDATE users SET password_hash = ${temPwd.hashPwd}
   WHERE email = ${email}
-  RETURNING user_id
+  RETURNING id
   `;
 }
