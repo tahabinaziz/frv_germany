@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.send("Hello from Bun + Express 🚀");
 });
 
-app.post("/users", async (req, res) => {
+app.post("/registration", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const user = await getUser(email);
