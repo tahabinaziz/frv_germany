@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser } from "./models/users.js";
+import { getUser, registerUser, resetPassword } from "./models/users.js";
 import authenticationMiddleware from "./middleware/authentication.js";
 const app = express();
 const port = process.env.PORT || 3000;
@@ -40,6 +40,26 @@ app.post("/login", authenticationMiddleware, (req, res) => {
     access_token: req.access_token,
   });
 });
+
+app.post("/forget_password", async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+    const user = await getUser(email);
+
+    if (user.length > 0) {
+      await resetPassword(email, newPassword);
+      return res.status(200).json({ message: "Password reset successfully" });
+    } else {
+      return res
+        .status(400)
+        .json({ error: "No user found with this email address." });
+    }
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

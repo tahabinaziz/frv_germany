@@ -9,3 +9,9 @@ export async function hashPassword(password) {
 export async function verifyPassword(plain, hash) {
   return bcrypt.compare(plain, hash);
 }
+
+export async function generatePasswordHash(plainText) {
+  const hashPwd = await hashPassword(plainText);
+
+  return { plainText: plainText, hashPwd: hashPwd };
+}
