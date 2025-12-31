@@ -2,10 +2,14 @@ import express from "express";
 import { getUser, registerUser, resetPassword } from "./models/users.js";
 import authenticationMiddleware from "./middleware/authentication.js";
 import cors from "cors";
+import basicAuthorizationMiddleware from "./middleware/authorization.js";
 const app = express();
 const port = process.env.PORT || 3000;
+import router from "./routes/api.js";
 app.use(cors());
 app.use(express.json());
+
+app.use("/api", basicAuthorizationMiddleware, router);
 
 app.get("/", (req, res) => {
   res.send("Hello from Bun + Express 🚀");
