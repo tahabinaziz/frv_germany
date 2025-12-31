@@ -11,7 +11,7 @@ export async function getApplications() {
   return await sql`
         SELECT *
         FROM applications
-        ORDER BY refenrence_number ASC
+        ORDER BY reference_number ASC
     `;
 }
 export async function registerApplication(
