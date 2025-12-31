@@ -1,5 +1,8 @@
 import express from "express";
-import { checkReferenceNumber, getApplications } from "../models/applications";
+import {
+  checkReferenceNumber,
+  getApplications,
+} from "../models/applications.js";
 const router = express.Router();
 
 router.post("/applications", async (req, res) => {
