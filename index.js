@@ -28,11 +28,6 @@ app.post("/registration", async (req, res) => {
 });
 
 app.post("/login", authenticationMiddleware, (req, res) => {
-  // const secretKey = process.env.JWT_SECRET_KEY || 'asdfasdfasdfadteasdasd13213123adas3432'
-  // if (!secretKey) {
-  //   return res.status(400).json({ error: "No token" });
-  // }
-
   return res.status(200).json({
     message: "Logged in successfully 😊 👌",
     user: {
