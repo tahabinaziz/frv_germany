@@ -1,7 +1,8 @@
 import express from "express";
+import { checkReferenceNumber, getApplications } from "../models/applications";
 const router = express.Router();
 
-router.post("/appliactions", async (req, res) => {
+router.post("/applications", async (req, res) => {
   try {
     const {
       referenceNumber,
@@ -19,7 +20,7 @@ router.post("/appliactions", async (req, res) => {
       insurance_submitted_date,
       passport_collected_date,
     } = req.body;
-    const refenrenceNumber = await getApplications(referenceNumber);
+    const refenrenceNumber = await checkReferenceNumber(referenceNumber);
     if (refenrenceNumber.length > 0) {
       return res.status(400).json({
         error: "Application with this reference number already exists",
@@ -95,4 +96,14 @@ router.put("/applications/:id", async (req, res) => {
     return res.status(400).json({ error: error });
   }
 });
+router.get("/applications", async (req, res) => {
+  try {
+    const applications = await getApplications();
+    return res.json(applications);
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error });
+  }
+});
+
 export default router;

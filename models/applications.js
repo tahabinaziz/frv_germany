@@ -1,11 +1,18 @@
 import sql from "./db.js";
 
-export async function getApplications(referenceNumber) {
+export async function checkReferenceNumber(referenceNumber) {
   return await sql`
     SELECT *
     FROM applications
     WHERE reference_number = ${referenceNumber}
   `;
+}
+export async function getAllApplications() {
+  return await sql`
+        SELECT *
+        FROM applications
+        ORDER BY refenrenceNumber ASC
+    `;
 }
 export async function registerApplication(
   referenceNumber,
