@@ -24,7 +24,7 @@ export async function registerApplication(
   frv_email_sent_date,
   appointment_conformation_date,
   visa_appointment_date,
-  visa_issue_date,
+  visa_issued_date,
   visa_start_date,
   duration_months,
   insurance_submitted_date,
@@ -32,9 +32,9 @@ export async function registerApplication(
 ) {
   const newApplication = await sql`
     INSERT INTO applications 
-      (reference_number, relationship_type, consulate, abh_offices, case_type, status, frv_email_sent_date, appointment_conformation_date, visa_appointment_date, visa_issue_date, visa_start_date, duration_months, insurance_submitted_date, passport_collected_date, created_at)
+      (reference_number, relationship_type, consulate, abh_offices, case_type, status, frv_email_sent_date, appointment_conformation_date, visa_appointment_date, visa_issued_date, visa_start_date, duration_months, insurance_submitted_date, passport_collected_date, created_at)
     VALUES 
-      (${referenceNumber}, ${relationship_type}, ${consulate}, ${abh_offices}, ${case_type}, ${status}, ${frv_email_sent_date}, ${appointment_conformation_date}, ${visa_appointment_date}, ${visa_issue_date}, ${visa_start_date}, ${duration_months}, ${insurance_submitted_date}, ${passport_collected_date}, NOW())
+      (${referenceNumber}, ${relationship_type}, ${consulate}, ${abh_offices}, ${case_type}, ${status}, ${frv_email_sent_date}, ${appointment_conformation_date}, ${visa_appointment_date}, ${visa_issued_date}, ${visa_start_date}, ${duration_months}, ${insurance_submitted_date}, ${passport_collected_date}, NOW())
     RETURNING id
   `;
 
@@ -52,7 +52,7 @@ export async function updateApplication(
   frv_email_sent_date,
   appointment_conformation_date,
   visa_appointment_date,
-  visa_issue_date,
+  visa_issued_date,
   visa_start_date,
   duration_months,
   insurance_submitted_date,
@@ -69,7 +69,7 @@ export async function updateApplication(
       frv_email_sent_date = ${frv_email_sent_date},
       appointment_conformation_date = ${appointment_conformation_date},
       visa_appointment_date = ${visa_appointment_date},
-      visa_issue_date = ${visa_issue_date},
+      visa_issued_date = ${visa_issued_date},
       visa_start_date = ${visa_start_date},
       duration_months = ${duration_months},
       insurance_submitted_date = ${insurance_submitted_date},
