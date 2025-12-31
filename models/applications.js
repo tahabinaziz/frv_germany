@@ -7,7 +7,7 @@ export async function checkReferenceNumber(referenceNumber) {
     WHERE reference_number = ${referenceNumber}
   `;
 }
-export async function getAllApplications() {
+export async function getApplications() {
   return await sql`
         SELECT *
         FROM applications
