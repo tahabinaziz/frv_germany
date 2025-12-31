@@ -95,3 +95,4 @@ router.put("/applications/:id", async (req, res) => {
     return res.status(400).json({ error: error });
   }
 });
+export default router;
