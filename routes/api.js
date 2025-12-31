@@ -2,6 +2,7 @@ import express from "express";
 import {
   checkReferenceNumber,
   getApplications,
+  registerApplication,
 } from "../models/applications.js";
 const router = express.Router();
 
