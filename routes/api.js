@@ -3,6 +3,7 @@ import {
   checkReferenceNumber,
   getApplications,
   registerApplication,
+  updateApplication,
 } from "../models/applications.js";
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.post("/applications", async (req, res) => {
       frv_email_sent_date,
       appointment_conformation_date,
       visa_appointment_date,
-      visa_issue_date,
+      visa_issued_date,
       visa_start_date,
       duration_months,
       insurance_submitted_date,
@@ -40,7 +41,7 @@ router.post("/applications", async (req, res) => {
       frv_email_sent_date,
       appointment_conformation_date,
       visa_appointment_date,
-      visa_issue_date,
+      visa_issued_date,
       visa_start_date,
       duration_months,
       insurance_submitted_date,
@@ -65,7 +66,7 @@ router.put("/applications/:id", async (req, res) => {
       frv_email_sent_date,
       appointment_conformation_date,
       visa_appointment_date,
-      visa_issue_date,
+      visa_issued_date,
       visa_start_date,
       duration_months,
       insurance_submitted_date,
@@ -83,7 +84,7 @@ router.put("/applications/:id", async (req, res) => {
       frv_email_sent_date,
       appointment_conformation_date,
       visa_appointment_date,
-      visa_issue_date,
+      visa_issued_date,
       visa_start_date,
       duration_months,
       insurance_submitted_date,
