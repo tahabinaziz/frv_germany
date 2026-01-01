@@ -3,10 +3,12 @@ import { getUser, registerUser, resetPassword } from "./models/users.js";
 import authenticationMiddleware from "./middleware/authentication.js";
 import cors from "cors";
 import basicAuthorizationMiddleware from "./middleware/authorization.js";
+import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT || 3000;
 import router from "./routes/api.js";
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api", basicAuthorizationMiddleware, router);
@@ -32,15 +34,23 @@ app.post("/registration", async (req, res) => {
 });
 
 app.post("/login", authenticationMiddleware, (req, res) => {
-  return res.status(200).json({
-    message: "Logged in successfully 😊 👌",
-    user: {
-      id: req.user.id,
-      email: req.user.email,
-      name: req.user.name,
-    },
-    access_token: req.access_token,
-  });
+  return res
+    .cookie("access_token", req.access_token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      // secure: process.env.NODE_ENV === "production",
+    })
+    .status(200)
+    .json({
+      message: "Logged in successfully 😊 👌",
+      user: {
+        id: req.user.id,
+        email: req.user.email,
+        name: req.user.name,
+      },
+      access_token: req.access_token,
+    });
 });
 
 app.post("/forget_password", async (req, res) => {
