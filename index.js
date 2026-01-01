@@ -53,6 +53,13 @@ app.post("/login", authenticationMiddleware, (req, res) => {
     });
 });
 
+app.get("/logout", (req, res) => {
+  return res
+    .clearCookie("access_token")
+    .status(200)
+    .json({ message: "Successfully logged out 😏 🍀" });
+});
+
 app.post("/forget_password", async (req, res) => {
   try {
     const { email, newPassword } = req.body;
