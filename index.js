@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 import router from "./routes/api.js";
 import authorizationMiddleware from "./middleware/authorization.js";
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(express.json());
 
