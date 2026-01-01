@@ -10,6 +10,7 @@ const router = express.Router();
 router.post("/applications", async (req, res) => {
   try {
     const {
+      user_id,
       reference_number,
       relationship_type,
       visa_type,
@@ -35,6 +36,7 @@ router.post("/applications", async (req, res) => {
       });
     }
     await registerApplication(
+      user_id,
       reference_number,
       relationship_type,
       consulate,

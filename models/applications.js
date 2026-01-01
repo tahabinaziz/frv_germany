@@ -15,6 +15,7 @@ export async function getApplications() {
     `;
 }
 export async function registerApplication(
+  user_id,
   reference_number,
   relationship_type,
   consulate,
@@ -35,9 +36,9 @@ export async function registerApplication(
 ) {
   const newApplication = await sql`
     INSERT INTO applications 
-      (reference_number, relationship_type, consulate, abh_offices, case_type, status, frv_email_sent_date, appointment_conformation_date, visa_appointment_date, visa_issued_date, visa_start_date, duration_months, insurance_submitted_date, passport_collected_date, created_at,visa_type, language, abh_document_submitted_date)
+      (user_id, reference_number, relationship_type, consulate, abh_offices, case_type, status, frv_email_sent_date, appointment_conformation_date, visa_appointment_date, visa_issued_date, visa_start_date, duration_months, insurance_submitted_date, passport_collected_date, created_at,visa_type, language, abh_document_submitted_date)
     VALUES 
-      (${reference_number}, ${relationship_type}, ${consulate}, ${abh_offices},${case_type}, ${status}, ${frv_email_sent_date}, ${appointment_conformation_date}, ${visa_appointment_date}, ${visa_issued_date}, ${visa_start_date}, ${duration_months}, ${insurance_submitted_date}, ${passport_collected_date}, NOW(), ${visa_type}, ${language}, ${abh_document_submitted_date})
+      (${user_id}, ${reference_number}, ${relationship_type}, ${consulate}, ${abh_offices},${case_type}, ${status}, ${frv_email_sent_date}, ${appointment_conformation_date}, ${visa_appointment_date}, ${visa_issued_date}, ${visa_start_date}, ${duration_months}, ${insurance_submitted_date}, ${passport_collected_date}, NOW(), ${visa_type}, ${language}, ${abh_document_submitted_date})
     RETURNING id
   `;
 
