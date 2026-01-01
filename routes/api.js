@@ -14,9 +14,6 @@ router.post("/applications", async (req, res) => {
       relationship_type,
       visa_type,
       consulate,
-      language,
-      abh_offices,
-      abh_document_submitted_date,
       case_type,
       status,
       frv_email_sent_date,
@@ -27,6 +24,9 @@ router.post("/applications", async (req, res) => {
       duration_months,
       insurance_submitted_date,
       passport_collected_date,
+      language,
+      abh_offices,
+      abh_document_submitted_date,
     } = req.body;
     const refenrenceNumber = await checkReferenceNumber(referenceNumber);
     if (refenrenceNumber.length > 0) {
@@ -37,11 +37,8 @@ router.post("/applications", async (req, res) => {
     await registerApplication(
       referenceNumber,
       relationship_type,
-      visa_type,
-      language,
       consulate,
       abh_offices,
-      abh_document_submitted_date,
       case_type,
       status,
       frv_email_sent_date,
@@ -51,7 +48,10 @@ router.post("/applications", async (req, res) => {
       visa_start_date,
       duration_months,
       insurance_submitted_date,
-      passport_collected_date
+      passport_collected_date,
+      visa_type,
+      language,
+      abh_document_submitted_date
     );
     return res.json({ message: "New application created successfully!" });
   } catch (error) {
