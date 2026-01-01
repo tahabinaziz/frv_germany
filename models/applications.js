@@ -15,7 +15,7 @@ export async function getApplications() {
     `;
 }
 export async function registerApplication(
-  referenceNumber,
+  reference_number,
   relationship_type,
   consulate,
   abh_offices,
@@ -37,7 +37,7 @@ export async function registerApplication(
     INSERT INTO applications 
       (reference_number, relationship_type, consulate, abh_offices, case_type, status, frv_email_sent_date, appointment_conformation_date, visa_appointment_date, visa_issued_date, visa_start_date, duration_months, insurance_submitted_date, passport_collected_date, created_at,visa_type, language, abh_document_submitted_date)
     VALUES 
-      (${referenceNumber}, ${relationship_type}, ${consulate}, ${abh_offices},${case_type}, ${status}, ${frv_email_sent_date}, ${appointment_conformation_date}, ${visa_appointment_date}, ${visa_issued_date}, ${visa_start_date}, ${duration_months}, ${insurance_submitted_date}, ${passport_collected_date}, NOW(), ${visa_type}, ${language}, ${abh_document_submitted_date})
+      (${reference_number}, ${relationship_type}, ${consulate}, ${abh_offices},${case_type}, ${status}, ${frv_email_sent_date}, ${appointment_conformation_date}, ${visa_appointment_date}, ${visa_issued_date}, ${visa_start_date}, ${duration_months}, ${insurance_submitted_date}, ${passport_collected_date}, NOW(), ${visa_type}, ${language}, ${abh_document_submitted_date})
     RETURNING id
   `;
 
@@ -46,7 +46,7 @@ export async function registerApplication(
 
 export async function updateApplication(
   id,
-  referenceNumber,
+  reference_number,
   visa_type,
   language,
   abh_document_submitted_date,
@@ -66,7 +66,7 @@ export async function updateApplication(
 ) {
   const updatedApplication = await sql`
     UPDATE applications SET
-      reference_number = ${referenceNumber},
+      reference_number = ${reference_number},
         visa_type = ${visa_type},
        language = ${language},
       relationship_type = ${relationship_type},

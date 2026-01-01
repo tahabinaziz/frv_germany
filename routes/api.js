@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/applications", async (req, res) => {
   try {
     const {
-      referenceNumber,
+      reference_number,
       relationship_type,
       visa_type,
       consulate,
@@ -28,14 +28,14 @@ router.post("/applications", async (req, res) => {
       abh_offices,
       abh_document_submitted_date,
     } = req.body;
-    const refenrenceNumber = await checkReferenceNumber(referenceNumber);
+    const refenrenceNumber = await checkReferenceNumber(reference_number);
     if (refenrenceNumber.length > 0) {
       return res.status(400).json({
         error: "Application with this reference number already exists",
       });
     }
     await registerApplication(
-      referenceNumber,
+      reference_number,
       relationship_type,
       consulate,
       abh_offices,
@@ -63,7 +63,7 @@ router.put("/applications/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      referenceNumber,
+      reference_number,
       relationship_type,
       visa_type,
       language,
@@ -84,7 +84,7 @@ router.put("/applications/:id", async (req, res) => {
 
     const updatedApplication = await updateApplication(
       id,
-      referenceNumber,
+      reference_number,
       relationship_type,
       visa_type,
       language,
