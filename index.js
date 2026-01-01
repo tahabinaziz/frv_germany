@@ -37,7 +37,7 @@ app.post("/login", authenticationMiddleware, (req, res) => {
   return res
     .cookie("access_token", req.access_token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "none",
       // secure: process.env.NODE_ENV === "production",
     })
