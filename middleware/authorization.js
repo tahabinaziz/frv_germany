@@ -19,7 +19,11 @@ const authorizationMiddleware = (req, res, next) => {
     return next();
   } catch (error) {
     console.error("JWT error:", err);
-    return res.status(400).json({ error });
+    return res.status(401).json({
+      message: "Invalid or expired token",
+      error: error.message,
+    });
+    //   return res.status(400).json({ error });
   }
 };
 
