@@ -1,6 +1,7 @@
 import express from "express";
 import {
   checkReferenceNumber,
+  getApplicationByUser,
   getApplications,
   registerApplication,
   updateApplication,
@@ -118,6 +119,17 @@ router.put("/applications/:id", async (req, res) => {
 router.get("/applications", async (req, res) => {
   try {
     const applications = await getApplications();
+    return res.json(applications);
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error });
+  }
+});
+
+router.get("/applications/:user_id", async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const applications = await getApplicationByUser(user_id);
     return res.json(applications);
   } catch (error) {
     console.log("err", error);

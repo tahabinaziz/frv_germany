@@ -90,3 +90,13 @@ export async function updateApplication(
 
   return updatedApplication[0];
 }
+
+export async function getApplicationByUser(user_id) {
+  const application = await sql`
+        SELECT *
+        FROM applications
+        WHERE user_id = ${user_id}
+    `;
+
+  return application[0];
+}
