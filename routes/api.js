@@ -65,46 +65,9 @@ router.post("/applications", async (req, res) => {
 router.put("/applications/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      reference_number,
-      relationship_type,
-      visa_type,
-      language,
-      consulate,
-      abh_offices,
-      abh_document_submitted_date,
-      case_type,
-      status,
-      frv_email_sent_date,
-      appointment_conformation_date,
-      visa_appointment_date,
-      visa_issued_date,
-      visa_start_date,
-      duration_months,
-      insurance_submitted_date,
-      passport_collected_date,
-    } = req.body;
+    const data = req.body;
 
-    const updatedApplication = await updateApplication(
-      id,
-      reference_number,
-      relationship_type,
-      visa_type,
-      language,
-      consulate,
-      abh_offices,
-      abh_document_submitted_date,
-      case_type,
-      status,
-      frv_email_sent_date,
-      appointment_conformation_date,
-      visa_appointment_date,
-      visa_issued_date,
-      visa_start_date,
-      duration_months,
-      insurance_submitted_date,
-      passport_collected_date
-    );
+    const updatedApplication = await updateApplication(id, data);
 
     if (updatedApplication.count === 0) {
       return res.status(404).json({ error: "Application not found" });
