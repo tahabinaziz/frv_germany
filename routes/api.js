@@ -129,11 +129,12 @@ router.get("/applications", async (req, res) => {
 router.get("/applications/user/:user_id", async (req, res) => {
   try {
     const { user_id } = req.params;
-    const applications = await getApplicationByUser(user_id);
-    return res.json(applications);
+    const application = await getApplicationByUser(user_id);
+    // Always send JSON, even if null
+    return res.json(application ?? {});
   } catch (error) {
     console.log("err", error);
-    return res.status(400).json({ error: error });
+    return res.status(400).json({ error: error.message || error });
   }
 });
 

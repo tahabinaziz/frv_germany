@@ -98,5 +98,5 @@ export async function getApplicationByUser(user_id) {
         WHERE user_id = ${user_id}
     `;
 
-  return application[0];
+  return application[0] ?? {};
 }
