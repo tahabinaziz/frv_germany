@@ -126,7 +126,7 @@ router.get("/applications", async (req, res) => {
   }
 });
 
-router.get("/applications/:user_id", async (req, res) => {
+router.get("/applications/user/:user_id", async (req, res) => {
   try {
     const { user_id } = req.params;
     const applications = await getApplicationByUser(user_id);
