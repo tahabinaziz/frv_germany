@@ -3,6 +3,7 @@ import { getUser, registerUser, resetPassword } from "./models/users.js";
 import authenticationMiddleware from "./middleware/authentication.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
 const app = express();
 const port = process.env.PORT || 3000;
 import router from "./routes/api.js";
@@ -11,11 +12,19 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/api", authorizationMiddleware, router);
+// Serve React frontend
+const buildPath = path.join(__dirname, "../frontend/dist"); // Adjust if build is elsewhere
+app.use(express.static(buildPath));
 
-app.get("/", (req, res) => {
-  res.send("Hello from Bun + Express 🚀");
+app.use("/api", authorizationMiddleware, router);
+// Handle React routing, return index.html for any unknown route
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
 });
+// app.get("/", (req, res) => {
+//   res.send("Hello from Bun + Express 🚀");
+// });
 
 app.post("/registration", async (req, res) => {
   try {
