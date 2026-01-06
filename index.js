@@ -16,7 +16,8 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // Serve React frontend
-const buildPath = path.join(__dirname, "./dist/"); // Adjust if build is elsewhere
+const buildPath = path.join(__dirname, "./dist"); // Adjust if build is elsewhere
+// ----------------- STATIC FILES -----------------
 app.use(express.static(buildPath));
 
 app.use("/api", authorizationMiddleware, router);
@@ -26,7 +27,9 @@ app.get("/", (req, res) => {
   res.send("Hello from Bun + Express 🚀");
 });
 
-app.get("/*", (req, res) => {
+// ----------------- SPA FALLBACK (Express 5 safe) -----------------
+// Matches all routes not handled above, including /dashboard, /profile, etc.
+app.get("/:path(*)", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
