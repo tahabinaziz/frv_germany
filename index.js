@@ -25,9 +25,9 @@ app.use("/api", authorizationMiddleware, router);
 // app.get("*", (req, res) => {
 //   res.sendFile(path.join(buildPath, "index.html"));
 // });
-// app.get("/", (req, res) => {
-//   res.send("Hello from Bun + Express 🚀");
-// });
+app.get("/", (req, res) => {
+  res.send("Hello from Bun + Express 🚀");
+});
 
 app.post("/registration", async (req, res) => {
   try {
