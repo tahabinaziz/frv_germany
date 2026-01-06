@@ -15,19 +15,8 @@ app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// Serve React frontend
-const buildPath = path.join(__dirname, "./dist"); // Adjust if build is elsewhere
-app.use(express.static(buildPath));
 
-app.use("/api", authorizationMiddleware, router);
-// Handle React routing, return index.html for any unknown route
-
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
-});
-// app.get("/", (req, res) => {
-//   res.send("Hello from Bun + Express 🚀");
-// });
+/* -------------------- API ROUTES FIRST -------------------- */
 
 app.post("/registration", async (req, res) => {
   try {
@@ -89,6 +78,20 @@ app.post("/forget_password", async (req, res) => {
     console.log("err", error);
     return res.status(400).json({ error: error });
   }
+});
+
+app.use("/api", authorizationMiddleware, router);
+// Handle React routing, return index.html for any unknown route
+
+/* -------------------- STATIC FRONTEND -------------------- */
+
+const buildPath = path.join(__dirname, "./dist");
+app.use(express.static(buildPath));
+
+/* -------------------- SPA FALLBACK (LAST) -------------------- */
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 app.listen(port, () => {
