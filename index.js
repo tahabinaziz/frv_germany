@@ -15,7 +15,7 @@ app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const buildPath = path.join(__dirname, "dist/"); // Adjust if build is elsewhere
+const buildPath = path.join(__dirname, "dist"); // Adjust if build is elsewhere
 console.log("buildPath: ", buildPath);
 
 // ----------------- STATIC FILES -----------------
@@ -92,10 +92,12 @@ app.use("/api", authorizationMiddleware, router);
 // Matches all routes not handled above, including /dashboard, /profile, etc.
 // SPA fallback (Express 5)
 // SPA fallback (for React routes)
-app.get(/.*/, (req, res) => {
+// app.get(/.*/, (req, res) => {
+//   res.sendFile(path.join(buildPath, "index.html"));
+// });
+app.get(/^\/(?!.*\..*)/, (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
-
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
