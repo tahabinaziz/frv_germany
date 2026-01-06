@@ -92,12 +92,10 @@ app.use("/api", authorizationMiddleware, router);
 // Matches all routes not handled above, including /dashboard, /profile, etc.
 // SPA fallback (Express 5)
 // SPA fallback (for React routes)
-// app.get(/.*/, (req, res) => {
-//   res.sendFile(path.join(buildPath, "index.html"));
-// });
-app.get(/^\/(?!.*\..*)/, (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
