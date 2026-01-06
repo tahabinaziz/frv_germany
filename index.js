@@ -17,6 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const buildPath = path.join(__dirname, "dist/"); // Adjust if build is elsewhere
 console.log("buildPath: ", buildPath);
+
 // ----------------- STATIC FILES -----------------
 app.use(express.static(buildPath));
 
