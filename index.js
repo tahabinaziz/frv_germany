@@ -92,7 +92,7 @@ app.use("/api", authorizationMiddleware, router);
 // Matches all routes not handled above, including /dashboard, /profile, etc.
 // SPA fallback (Express 5)
 // SPA fallback (for React routes)
-app.get("/*", (req, res) => {
+app.get("/*splat", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
