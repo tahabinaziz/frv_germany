@@ -8,10 +8,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 import router from "./routes/api.js";
 import authorizationMiddleware from "./middleware/authorization.js";
+import { fileURLToPath } from "url";
 app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(express.json());
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Serve React frontend
 const buildPath = path.join(__dirname, "../frontend/dist"); // Adjust if build is elsewhere
 app.use(express.static(buildPath));
