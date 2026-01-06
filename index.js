@@ -13,12 +13,12 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(express.json());
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Serve React frontend
-// const buildPath = path.join(__dirname, "./dist"); // Adjust if build is elsewhere
+const buildPath = path.join(__dirname, "./dist"); // Adjust if build is elsewhere
 // ----------------- STATIC FILES -----------------
-// app.use(express.static(buildPath));
+app.use(express.static(buildPath));
 
 app.use("/api", authorizationMiddleware, router);
 // Handle React routing, return index.html for any unknown route
@@ -91,9 +91,9 @@ app.post("/forget_password", async (req, res) => {
 
 // ----------------- SPA FALLBACK (Express 5 safe) -----------------
 // Matches all routes not handled above, including /dashboard, /profile, etc.
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(buildPath, "index.html"));
-// });
+app.get("/*splat", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
