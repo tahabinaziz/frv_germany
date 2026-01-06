@@ -23,9 +23,9 @@ app.use(express.static(buildPath));
 app.use("/api", authorizationMiddleware, router);
 // Handle React routing, return index.html for any unknown route
 
-app.get("/", (req, res) => {
-  res.send("Hello from Bun + Express 🚀");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello from Bun + Express 🚀");
+// });
 
 app.post("/registration", async (req, res) => {
   try {
