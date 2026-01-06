@@ -27,12 +27,6 @@ app.get("/", (req, res) => {
   res.send("Hello from Bun + Express 🚀");
 });
 
-// ----------------- SPA FALLBACK (Express 5 safe) -----------------
-// Matches all routes not handled above, including /dashboard, /profile, etc.
-app.get("/:path(*)", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
-});
-
 app.post("/registration", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -93,6 +87,12 @@ app.post("/forget_password", async (req, res) => {
     console.log("err", error);
     return res.status(400).json({ error: error });
   }
+});
+
+// ----------------- SPA FALLBACK (Express 5 safe) -----------------
+// Matches all routes not handled above, including /dashboard, /profile, etc.
+app.get("/:path(*)", (req, res) => {
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 app.listen(port, () => {
