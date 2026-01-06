@@ -91,13 +91,10 @@ app.post("/forget_password", async (req, res) => {
 
 // ----------------- SPA FALLBACK (Express 5 safe) -----------------
 // Matches all routes not handled above, including /dashboard, /profile, etc.
-app.get("/*splat", (req, res) => {
+app.get("/{*splat}", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// ---------- Export app for Vercel ----------
-export default app;
