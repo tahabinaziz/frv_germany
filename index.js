@@ -22,7 +22,7 @@ app.use(express.static(buildPath));
 app.use("/api", authorizationMiddleware, router);
 // Handle React routing, return index.html for any unknown route
 
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 // app.get("/", (req, res) => {
