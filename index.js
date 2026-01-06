@@ -96,6 +96,11 @@ app.get("/*splat", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// ---------- Start Server ----------
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () =>
+    console.log(`Server running locally on http://localhost:${port}`)
+  );
+}
+
+export default app; // For Vercel serverless function
