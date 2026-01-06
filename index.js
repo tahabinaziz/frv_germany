@@ -94,7 +94,7 @@ app.post("/forget_password", async (req, res) => {
 // ----------------- SPA FALLBACK (Express 5 safe) -----------------
 // Matches all routes not handled above, including /dashboard, /profile, etc.
 // SPA fallback (Express 5)
-app.get("*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
