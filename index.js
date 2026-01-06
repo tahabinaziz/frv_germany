@@ -15,6 +15,7 @@ app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+console.log("__dirname", __dirname);
 // Serve React frontend
 const buildPath = path.join(__dirname, "dist"); // Adjust if build is elsewhere
 // ----------------- STATIC FILES -----------------
@@ -92,7 +93,7 @@ app.post("/forget_password", async (req, res) => {
 // ----------------- SPA FALLBACK (Express 5 safe) -----------------
 // Matches all routes not handled above, including /dashboard, /profile, etc.
 // SPA fallback (Express 5)
-app.get("/.*/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
