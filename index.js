@@ -25,9 +25,9 @@ app.use(express.static(buildPath));
 app.use("/api", authorizationMiddleware, router);
 // Handle React routing, return index.html for any unknown route
 
-// app.get("/", (req, res) => {
-//   res.send("Hello from Bun + Express 🚀");
-// });
+app.get("/", (req, res) => {
+  res.send("Hello from Bun + Express 🚀");
+});
 
 app.post("/registration", async (req, res) => {
   try {
@@ -94,9 +94,9 @@ app.post("/forget_password", async (req, res) => {
 // ----------------- SPA FALLBACK (Express 5 safe) -----------------
 // Matches all routes not handled above, including /dashboard, /profile, etc.
 // SPA fallback (Express 5)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(buildPath, "index.html"));
+// });
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
