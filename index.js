@@ -105,8 +105,8 @@ app.post("/reference_number", async (req, res) => {
 app.put("/reference_number/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const reference_number = req.body.reference_number;
-    await editReference(id, reference_number);
+    const current_reference_number = req.body.current_reference_number;
+    await editReference(id, current_reference_number);
     return res.status(200).json({ message: "Updated successfully" });
   } catch (error) {
     return res.status(400).json({ error: error.message || error });
