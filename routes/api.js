@@ -105,7 +105,7 @@ router.get("/applications/user/:user_id", async (req, res) => {
     return res.status(400).json({ error: error.message || error });
   }
 });
-router.get("/sumamry", async (req, res) => {
+router.get("/summary", async (req, res) => {
   try {
     const sumamry = await applicationsSummary();
     return res.status(200).json(sumamry);
