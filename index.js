@@ -102,7 +102,7 @@ app.post("/reference_number", async (req, res) => {
   }
 });
 
-router.put("/reference_number/:id", async (req, res) => {
+app.put("/reference_number/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const reference_number = req.body.reference_number;
