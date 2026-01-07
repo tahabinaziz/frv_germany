@@ -9,6 +9,10 @@ const port = process.env.PORT || 3000;
 import router from "./routes/api.js";
 import authorizationMiddleware from "./middleware/authorization.js";
 import { fileURLToPath } from "url";
+import {
+  addCurrentReferenceNumber,
+  getCurrentReferenceNumber,
+} from "./models/applications.js";
 app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(express.json());
@@ -84,6 +88,28 @@ app.post("/forget_password", async (req, res) => {
   } catch (error) {
     console.log("err", error);
     return res.status(400).json({ error: error });
+  }
+});
+
+app.post("/reference_number", async (req, res) => {
+  try {
+    const { current_reference_number } = req.body;
+    await addCurrentReferenceNumber(current_reference_number);
+    return res.status(200).json({ message: "Added successfully" });
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
+});
+
+app.get("/reference_number", async (req, res) => {
+  try {
+    const _current_reference = await getCurrentReferenceNumber();
+
+    return res.status(200).json({
+      current_reference_number: _current_reference ?? 0, // default to 0 if null
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
   }
 });
 

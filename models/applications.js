@@ -107,3 +107,19 @@ export async function getApplicationByUser(user_id) {
 
   return application[0] ?? {};
 }
+
+export async function addCurrentReferenceNumber(current_reference_number) {
+  return await sql`INSERT INTO current_reference (current_reference_number) 
+    VALUES (${current_reference_number})`;
+}
+
+export async function getCurrentReferenceNumber() {
+  const reference = await sql`
+    SELECT current_reference_number 
+    FROM current_reference 
+    ORDER BY id DESC 
+    LIMIT 1
+  `;
+
+  return reference[0]?.current_reference_number ?? null;
+}
