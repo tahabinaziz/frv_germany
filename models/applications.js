@@ -87,6 +87,12 @@ export async function addCurrentReferenceNumber(current_reference_number) {
     VALUES (${current_reference_number})`;
 }
 
+export async function editReference(id, current_reference_number) {
+  return await sql`UPDATE current_reference 
+    SET current_reference_number = ${current_reference_number} 
+    WHERE id = ${id}`;
+}
+
 export async function getCurrentReferenceNumber() {
   const reference = await sql`
     SELECT current_reference_number 
