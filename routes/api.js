@@ -19,7 +19,7 @@ router.post("/applications", async (req, res) => {
       case_type,
       status,
       frv_email_sent_date,
-      appointment_conformation_date,
+      appointment_confirmation_date,
       visa_appointment_date,
       visa_issued_date,
       visa_start_date,
@@ -30,6 +30,10 @@ router.post("/applications", async (req, res) => {
       abh_offices,
       abh_document_submitted_date,
     } = req.body;
+    console.log("body:", req.body);
+    if (!user_id) {
+      return res.status(400).json({ error: "user_id is required" });
+    }
     const refenrenceNumber = await checkReferenceNumber(reference_number);
     if (refenrenceNumber.length > 0) {
       return res.status(400).json({
@@ -45,7 +49,7 @@ router.post("/applications", async (req, res) => {
       case_type,
       status,
       frv_email_sent_date,
-      appointment_conformation_date,
+      appointment_confirmation_date,
       visa_appointment_date,
       visa_issued_date,
       visa_start_date,
