@@ -84,7 +84,7 @@ export async function updateApplication(id, data) {
       case_type = ${data.case_type},
       status = ${data.status},
       frv_email_sent_date = ${data.frv_email_sent_date},
-      appointment_conformation_date = ${data.appointment_conformation_date},
+      appointment_confirmation_date = ${data.appointment_confirmation_date},
       visa_appointment_date = ${data.visa_appointment_date},
       visa_issued_date = ${data.visa_issued_date},
       visa_start_date = ${data.visa_start_date},
