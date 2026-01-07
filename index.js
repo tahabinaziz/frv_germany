@@ -101,6 +101,17 @@ app.post("/reference_number", async (req, res) => {
   }
 });
 
+router.put("/reference_number/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const reference_number = req.body.reference_number;
+    await editReference(id, reference_number);
+    return res.status(200).json({ message: "Updated successfully" });
+  } catch (error) {
+    return res.status(400).json({ error: error.message || error });
+  }
+});
+
 app.get("/reference_number", async (req, res) => {
   try {
     const _current_reference = await getCurrentReferenceNumber();
