@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  applicationsSummary,
   checkReferenceNumber,
   getApplicationByUser,
   getApplications,
@@ -101,6 +102,14 @@ router.get("/applications/user/:user_id", async (req, res) => {
     return res.json(application ?? {});
   } catch (error) {
     console.log("err", error);
+    return res.status(400).json({ error: error.message || error });
+  }
+});
+router.get("/sumamry", async (req, res) => {
+  try {
+    const sumamry = await applicationsSummary();
+    return res.status(200).json(sumamry);
+  } catch (error) {
     return res.status(400).json({ error: error.message || error });
   }
 });

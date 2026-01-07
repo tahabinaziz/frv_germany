@@ -45,32 +45,6 @@ export async function registerApplication(
   return newApplication[0];
 }
 
-// export async function updateApplication(id, data) {
-//   const updatedApplication = await sql`
-//     UPDATE applications SET
-//       reference_number = ${data.reference_number},
-//       case_type = ${data.case_type},
-//       language = ${data.language},
-//       relationship_type = ${data.relationship_type},
-//       consulate = ${data.consulate},
-//       abh_offices = ${data.abh_offices},
-//       abh_document_submitted_date = ${data.abh_document_submitted_date},
-//       case_type = ${data.case_type},
-//       status = ${data.status},
-//       frv_email_sent_date = ${data.frv_email_sent_date},
-//       appointment_conformation_date = ${data.appointment_conformation_date},
-//       visa_appointment_date = ${data.visa_appointment_date},
-//       visa_issued_date = ${data.visa_issued_date},
-//       visa_start_date = ${data.visa_start_date},
-//       duration_months = ${data.duration_months},
-//       insurance_submitted_date = ${data.insurance_submitted_date},
-//       passport_collected_date = ${data.passport_collected_date}
-//     WHERE id = ${id}
-//     RETURNING *
-//   `;
-//   return updatedApplication[0];
-// }
-
 export async function updateApplication(id, data) {
   const updatedApplication = await sql`
     UPDATE applications SET
@@ -122,4 +96,27 @@ export async function getCurrentReferenceNumber() {
   `;
 
   return reference[0]?.current_reference_number ?? null;
+}
+
+export async function applicationsSummary() {
+  // Total applications
+  const totalResult = await sql`SELECT COUNT(*) AS total FROM applications`;
+  const totalApplications = Number(totalResult[0].total);
+
+  // Consulate counts
+  const consulateResult = await sql`
+      SELECT consulate, COUNT(*) AS count
+      FROM applications
+      GROUP BY consulate
+    `;
+
+  // Convert result to object: { Karachi: 22, Islamabad: 15 }
+  const consulateCounts = {};
+  consulateResult.forEach((row) => {
+    consulateCounts[row.consulate] = Number(row.count);
+  });
+  return {
+    totalApplications,
+    consulateCounts,
+  };
 }
