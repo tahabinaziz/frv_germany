@@ -7,6 +7,12 @@ import {
   registerApplication,
   updateApplication,
 } from "../models/applications.js";
+import {
+  deleteStudent,
+  getStudentById,
+  updateStudent,
+  registerStudent,
+} from "../models/student.js";
 const router = express.Router();
 
 router.post("/applications", async (req, res) => {
@@ -59,7 +65,7 @@ router.post("/applications", async (req, res) => {
       passport_collected_date,
       visa_type,
       language,
-      abh_document_submitted_date
+      abh_document_submitted_date,
     );
     return res.json({ message: "New application created successfully!" });
   } catch (error) {
@@ -114,4 +120,87 @@ router.get("/summary", async (req, res) => {
   }
 });
 
+router.post("/students", async (req, res) => {
+  try {
+    const {
+      student_id,
+      name,
+      fh_name,
+      email,
+      gender,
+      phone,
+      department,
+      course,
+      amount,
+      bank,
+      status,
+      created_at,
+      updated_at,
+    } = req.body;
+    console.log("body:", req.body);
+    if (!student_id) {
+      return res.status(400).json({ error: "student_id is required" });
+    }
+    await registerStudent(
+      student_id,
+      name,
+      fh_name,
+      email,
+      gender,
+      phone,
+      department,
+      course,
+      amount,
+      bank,
+      status,
+      created_at,
+      updated_at,
+    );
+
+    return res.json({ message: "New application created successfully!" });
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error });
+  }
+});
+
+router.put("/students/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+
+    const updatedStudent = await updateStudent(id, data);
+
+    if (updatedStudent.count === 0) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    return res.json({ message: "Student updated successfully!" });
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error });
+  }
+});
+
+router.get("/students/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const student = await getStudentById(id);
+    // Always send JSON, even if null
+    return res.json(student ?? {});
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error.message || error });
+  }
+});
+router.delete("/students/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteStudent(id);
+    return res.json({ message: "Student deleted successfully!" });
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error.message || error });
+  }
+});
 export default router;
