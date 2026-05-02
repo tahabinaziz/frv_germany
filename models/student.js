@@ -19,7 +19,7 @@ export async function registerStudent(
     INSERT INTO students 
       (student_id, name, fh_name, email, gender, phone, department, course, amount, bank, status, created_at, updated_at)
     VALUES 
-      (${student_id}, ${name}, ${fh_name}, ${email}, ${gender}, ${phone}, ${department}, ${course}, ${amount}, ${bank}, ${status}, ${created_at}, ${updated_at})
+      (${student_id}, ${name}, ${fh_name}, ${email}, ${gender}, ${phone}, ${department}, ${course}, ${amount}, ${bank}, ${status}, NOW(), NOW())
     RETURNING id
   `;
 
