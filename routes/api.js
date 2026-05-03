@@ -12,6 +12,7 @@ import {
   getStudentById,
   updateStudent,
   registerStudent,
+  getAllStudents,
 } from "../models/student.js";
 const router = express.Router();
 
