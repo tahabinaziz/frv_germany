@@ -14,7 +14,8 @@ export async function studentStats() {
     SELECT
       (SELECT COUNT(*) FROM students) AS total_students,
       (SELECT COUNT(*) FROM students WHERE status = 'active') AS active_students,
-      (SELECT COUNT(*) FROM students WHERE status = 'inactive') AS inactive_students
+      (SELECT COUNT(*) FROM students WHERE status = 'inactive') AS inactive_students,
+      (SELECT COUNT(*) FROM students WHERE status = 'pending') AS pending_students
   `;
   return stats[0];
 }
