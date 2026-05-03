@@ -1,5 +1,14 @@
 import sql from "./db.js";
 
+export async function getAllStudents() {
+  const students = await sql`
+    SELECT *
+    FROM students
+    ORDER BY created_at DESC
+  `;
+  return students;
+}
+
 export async function registerStudent(
   student_id,
   name,
@@ -31,7 +40,6 @@ export async function updateStudent(id, data) {
     UPDATE students SET
       name = ${data.name},
       fh_name = ${data.fh_name},
-      email = ${data.email},
       gender = ${data.gender},
       phone = ${data.phone},
       department = ${data.department},
@@ -46,7 +54,7 @@ export async function updateStudent(id, data) {
 
   return updatedStudent[0];
 }
-export async function getStudentById(student_id) {
+export async function getStudentById(id) {
   const student = await sql`
     SELECT *
     FROM students
