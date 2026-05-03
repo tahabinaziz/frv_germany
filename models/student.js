@@ -6,20 +6,17 @@ export async function getAllStudents() {
     FROM students
     ORDER BY created_at DESC
   `;
+  return students;
+}
 
-  const [stats] = await sql`
+export async function studentStats() {
+  const stats = await sql`
     SELECT
-      COUNT(*)::int AS total,
-      COUNT(*) FILTER (WHERE status = 'active')::int AS active,
-      COUNT(*) FILTER (WHERE status = 'pending')::int AS pending,
-      COUNT(*) FILTER (WHERE status = 'inactive')::int AS inactive
-    FROM students;
+      (SELECT COUNT(*) FROM students) AS total_students,
+      (SELECT COUNT(*) FROM students WHERE status = 'active') AS active_students,
+      (SELECT COUNT(*) FROM students WHERE status = 'inactive') AS inactive_students
   `;
-
-  return {
-    students,
-    stats,
-  };
+  return stats[0];
 }
 
 export async function registerStudent(

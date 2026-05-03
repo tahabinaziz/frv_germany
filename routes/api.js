@@ -13,6 +13,7 @@ import {
   updateStudent,
   registerStudent,
   getAllStudents,
+  studentStats,
 } from "../models/student.js";
 const router = express.Router();
 
@@ -172,6 +173,14 @@ router.get("/students", async (req, res) => {
   } catch (error) {
     console.log("err", error);
     return res.status(400).json({ error: error });
+  }
+});
+router.get("/students/stats", async (req, res) => {
+  try {
+    const stats = await studentStats();
+    return res.status(200).json(stats);
+  } catch (error) {
+    return res.status(400).json({ error: error.message || error });
   }
 });
 router.put("/students/:id", async (req, res) => {
