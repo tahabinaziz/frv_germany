@@ -164,6 +164,15 @@ router.post("/students", async (req, res) => {
   }
 });
 
+router.get("/students", async (req, res) => {
+  try {
+    const students = await getAllStudents();
+    return res.json(students);
+  } catch (error) {
+    console.log("err", error);
+    return res.status(400).json({ error: error });
+  }
+});
 router.put("/students/:id", async (req, res) => {
   try {
     const { id } = req.params;
