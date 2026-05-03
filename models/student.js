@@ -6,7 +6,20 @@ export async function getAllStudents() {
     FROM students
     ORDER BY created_at DESC
   `;
-  return students;
+
+  const [stats] = await sql`
+    SELECT
+      COUNT(*)::int AS total,
+      COUNT(*) FILTER (WHERE status = 'active')::int AS active,
+      COUNT(*) FILTER (WHERE status = 'pending')::int AS pending,
+      COUNT(*) FILTER (WHERE status = 'inactive')::int AS inactive
+    FROM students;
+  `;
+
+  return {
+    students,
+    stats,
+  };
 }
 
 export async function registerStudent(
@@ -28,7 +41,7 @@ export async function registerStudent(
     INSERT INTO students 
       (student_id, name, fh_name, email, gender, phone, department, course, amount, bank, status, created_at, updated_at)
     VALUES 
-      (${student_id}, ${name}, ${fh_name}, ${email}, ${gender}, ${phone}, ${department}, ${course}, ${amount}, ${bank}, ${status}, NOW(), NOW())
+      (${student_id}, ${name}, ${fh_name}, ${email}, ${gender}, ${phone}, ${department}, ${course}, ${amount}, ${bank}, 'active', NOW(), NOW())
     RETURNING id
   `;
 
