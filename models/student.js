@@ -69,12 +69,3 @@ export async function deleteStudent(id) {
     WHERE id = ${id}
   `;
 }
-
-export async function getAllStudents() {
-  const students = await sql`
-    SELECT *
-    FROM students
-    ORDER BY created_at DESC
-  `;
-  return students;
-}
